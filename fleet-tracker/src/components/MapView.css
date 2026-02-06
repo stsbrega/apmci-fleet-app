@@ -1,0 +1,321 @@
+.map-view-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.map-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d3748;
+  margin: 0;
+}
+
+.map-status {
+  font-size: 13px;
+  color: #718096;
+}
+
+.leaflet-map {
+  height: 450px;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Custom truck marker styles */
+.custom-truck-marker {
+  background: transparent;
+  border: none;
+}
+
+.truck-marker-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
+  color: white;
+  transition: transform 0.2s ease;
+}
+
+.truck-marker-icon:hover {
+  transform: scale(1.15);
+}
+
+.truck-number {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Popup styles */
+.truck-popup {
+  min-width: 180px;
+}
+
+.truck-popup h4 {
+  margin: 0 0 10px 0;
+  font-size: 16px;
+  color: #2d3748;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.truck-popup p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.truck-popup strong {
+  color: #2d3748;
+}
+
+.popup-status {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.popup-status.active {
+  background: #c6f6d5;
+  color: #22543d;
+}
+
+.popup-status.idle {
+  background: #feebc8;
+  color: #7b341e;
+}
+
+.popup-status.maintenance {
+  background: #fed7d7;
+  color: #742a2a;
+}
+
+/* Legend - standalone container below map */
+.map-legend {
+  padding: 8px 16px;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  margin-top: 8px;
+}
+
+.legend-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #718096;
+  white-space: nowrap;
+}
+
+.legend-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.legend-dot.active {
+  background: #48bb78;
+}
+
+.legend-dot.idle {
+  background: #ed8936;
+}
+
+.legend-dot.maintenance {
+  background: #f56565;
+}
+
+.legend-dot.factory {
+  background: #0077b6;
+}
+
+.legend-dot.customer {
+  background: #9b59b6;
+}
+
+/* Factory marker styles */
+.custom-factory-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-factory-marker > div {
+  animation: factory-pulse 2s ease-in-out infinite;
+}
+
+.custom-factory-marker:hover > div {
+  transform: rotate(-45deg) scale(1.1);
+}
+
+@keyframes factory-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(0,119,182,0.4);
+  }
+  50% {
+    box-shadow: 0 4px 25px rgba(0,119,182,0.8), 0 0 40px rgba(0,119,182,0.4);
+  }
+}
+
+/* Yamaha/Customer marker styles */
+.custom-yamaha-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-yamaha-marker > div {
+  transition: transform 0.2s ease;
+}
+
+.custom-yamaha-marker:hover > div {
+  transform: scale(1.15);
+}
+
+/* Honda marker styles */
+.custom-honda-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-honda-marker > div {
+  transition: transform 0.2s ease;
+}
+
+.custom-honda-marker:hover > div {
+  transform: scale(1.15);
+}
+
+/* Honda popup specific styles */
+.customer-popup.honda h4 {
+  color: #9b59b6;
+  border-bottom-color: #9b59b6;
+}
+
+.customer-popup.honda .customer-note {
+  color: #9b59b6 !important;
+  background: #f3e8f9;
+}
+
+/* Customer popup styles */
+.customer-popup {
+  min-width: 200px;
+}
+
+.customer-popup h4 {
+  margin: 0 0 8px 0;
+  font-size: 15px;
+  color: #9b59b6;
+  border-bottom: 2px solid #9b59b6;
+  padding-bottom: 8px;
+}
+
+.customer-popup p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.customer-address {
+  font-size: 12px !important;
+  color: #718096 !important;
+  line-height: 1.4;
+}
+
+.customer-note {
+  font-size: 11px !important;
+  color: #9b59b6 !important;
+  font-weight: 600;
+  background: #f3e8f9;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 6px !important;
+}
+
+/* Factory popup styles */
+.factory-popup {
+  min-width: 200px;
+}
+
+.factory-popup h4 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #0077b6;
+  border-bottom: 2px solid #0077b6;
+  padding-bottom: 8px;
+}
+
+.factory-popup p {
+  margin: 6px 0;
+  font-size: 13px;
+  color: #4a5568;
+}
+
+.factory-address {
+  font-size: 12px !important;
+  color: #718096 !important;
+  line-height: 1.4;
+}
+
+.factory-note {
+  font-size: 11px !important;
+  color: #0077b6 !important;
+  font-weight: 600;
+  background: #e6f3f8;
+  padding: 4px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 6px !important;
+}
+
+/* Override Leaflet default styles */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.leaflet-popup-content {
+  margin: 12px 14px;
+}
+
+.leaflet-popup-tip {
+  background: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .leaflet-map {
+    height: 350px;
+  }
+
+  .legend-items {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
