@@ -1,6 +1,6 @@
 # Dependencies
 node_modules/
-*/node_modules/
+**/node_modules/
 
 # Environment files (keep .env.example)
 .env
@@ -9,7 +9,7 @@ node_modules/
 !.env.example
 
 # Build outputs
-fleet-tracker/build/
+**/build/
 dist/
 
 # Logs
