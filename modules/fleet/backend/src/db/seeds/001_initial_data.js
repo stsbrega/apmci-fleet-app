@@ -36,6 +36,7 @@ exports.seed = async function(knex) {
 
   // Check if FMC150 migration columns exist
   const hasDeviceModel = await knex.schema.hasColumn('trucks', 'gps_device_model');
+  const hasRegistrationFields = await knex.schema.hasColumn('trucks', 'body_type');
 
   const fmc = (i) => hasDeviceModel ? {
     gps_device_model: 'FMC150',
@@ -43,23 +44,25 @@ exports.seed = async function(knex) {
     gps_protocol: 'tcp_codec8e'
   } : {};
 
-  // ── APMCI actual fleet ─ 15 trucks ──────────────────────────────
+  const reg = (data) => hasRegistrationFields ? data : {};
+
+  // ── APMCI actual fleet ─ 15 trucks (from LTO registration) ─────
   const truckData = [
-    { id: 'TRK-001', plate_number: 'NCG 4723', make: 'Hino', model: 'WU342L-M', year: 2018, vin: 'MJECH40HXG5142022', status: 'active', fuel_capacity: 100, current_fuel_level: 78, odometer: 112000, gps_device_id: 'GPS-001', ...fmc(1) },
-    { id: 'TRK-002', plate_number: 'NDF 7968', make: 'Hino', model: 'WU342L-M', year: 2016, vin: 'MJECH40H1G5142023', status: 'active', fuel_capacity: 100, current_fuel_level: 65, odometer: 148000, gps_device_id: 'GPS-002', ...fmc(2) },
-    { id: 'TRK-003', plate_number: 'NCF-2403', make: 'Hino', model: 'WU730L', year: 2016, vin: 'JHHZJL0H102000313', status: 'active', fuel_capacity: 200, current_fuel_level: 55, odometer: 156000, gps_device_id: 'GPS-003', ...fmc(3) },
-    { id: 'TRK-004', plate_number: 'NAL 2498', make: 'Hino', model: 'FG8J', year: 2017, vin: 'FG8J17888', status: 'active', fuel_capacity: 300, current_fuel_level: 72, odometer: 125000, gps_device_id: 'GPS-004', ...fmc(4) },
-    { id: 'TRK-005', plate_number: 'ZBJ-997', make: 'Isuzu', model: 'NQR', year: 2005, vin: 'PABN1R71RL5200178', status: 'maintenance', fuel_capacity: 200, current_fuel_level: 30, odometer: 312000, gps_device_id: 'GPS-005', ...fmc(5) },
-    { id: 'TRK-006', plate_number: 'NQO-721', make: 'Isuzu', model: 'ELF', year: 2009, vin: 'ENKR-20080481-C', status: 'active', fuel_capacity: 100, current_fuel_level: 82, odometer: 245000, gps_device_id: 'GPS-006', ...fmc(6) },
-    { id: 'TRK-007', plate_number: 'NAZ 4573', make: 'Isuzu', model: 'FRR', year: 2016, vin: 'FRR35T4-7000044', status: 'idle', fuel_capacity: 200, current_fuel_level: 45, odometer: 142000, gps_device_id: 'GPS-007', ...fmc(7) },
-    { id: 'TRK-008', plate_number: 'NDN 3363', make: 'Hino', model: 'Profia', year: 2018, vin: 'PN2PWJ-11674', status: 'active', fuel_capacity: 400, current_fuel_level: 68, odometer: 98000, gps_device_id: 'GPS-008', ...fmc(8) },
-    { id: 'TRK-009', plate_number: 'CBR 1147', make: 'Isuzu', model: 'Forward', year: 2022, vin: 'FSD34T4-7000116', status: 'active', fuel_capacity: 200, current_fuel_level: 88, odometer: 38000, gps_device_id: 'GPS-009', ...fmc(9) },
-    { id: 'TRK-010', plate_number: 'NGF 9660', make: 'Hino', model: 'Profia', year: 2018, vin: 'FN2PWJ-12186', status: 'active', fuel_capacity: 400, current_fuel_level: 52, odometer: 105000, gps_device_id: 'GPS-010', ...fmc(10) },
-    { id: 'TRK-011', plate_number: 'NGX 3840', make: 'Isuzu', model: 'GIGA', year: 2020, vin: 'CXG77X8-7000117', status: 'active', fuel_capacity: 400, current_fuel_level: 61, odometer: 78000, gps_device_id: 'GPS-011', ...fmc(11) },
-    { id: 'TRK-012', plate_number: 'NFY 8062', make: 'Isuzu', model: 'GIGA', year: 2018, vin: 'CYG51Y5Z-7000020', status: 'active', fuel_capacity: 400, current_fuel_level: 74, odometer: 115000, gps_device_id: 'GPS-012', ...fmc(12) },
-    { id: 'TRK-013', plate_number: 'CBF 2015', make: 'Isuzu', model: 'FTR', year: 2023, vin: 'FTR34-7001940', status: 'idle', fuel_capacity: 200, current_fuel_level: 90, odometer: 22000, gps_device_id: 'GPS-013', ...fmc(13) },
-    { id: 'TRK-014', plate_number: 'CCE 5647', make: 'Isuzu', model: 'Forward', year: 2025, vin: 'FRDS4V4-7000070', status: 'active', fuel_capacity: 200, current_fuel_level: 95, odometer: 5200, gps_device_id: 'GPS-014', ...fmc(14) },
-    { id: 'TRK-015', plate_number: 'CCE 5649', make: 'Isuzu', model: 'Forward', year: 2023, vin: 'FRD34T4-7000228', status: 'active', fuel_capacity: 200, current_fuel_level: 70, odometer: 32000, gps_device_id: 'GPS-015', ...fmc(15) },
+    { id: 'TRK-001', plate_number: 'NCG 4723', make: 'Hino', model: 'WU342L-M', year: 2018, vin: 'MJECH40HXG5142022', status: 'active', fuel_capacity: 100, current_fuel_level: 78, odometer: 112000, gps_device_id: 'GPS-001', ...fmc(1), ...reg({ mv_file_no: '1301-00000694302', engine_no: 'W04DTPJ65657', body_type: 'Aluminum Van', gross_weight: 4500, net_capacity: 2250 }) },
+    { id: 'TRK-002', plate_number: 'NDF 7968', make: 'Hino', model: 'WU342L-M', year: 2016, vin: 'MJECH40H1G5142023', status: 'active', fuel_capacity: 100, current_fuel_level: 65, odometer: 148000, gps_device_id: 'GPS-002', ...fmc(2), ...reg({ mv_file_no: '1301-00000694306', engine_no: 'W04DTPJ65655', body_type: 'Aluminum Van', gross_weight: 4500, net_capacity: 2250 }) },
+    { id: 'TRK-003', plate_number: 'NCF-2403', make: 'Hino', model: 'WU730L', year: 2016, vin: 'JHHZJL0H102000313', status: 'active', fuel_capacity: 200, current_fuel_level: 55, odometer: 156000, gps_device_id: 'GPS-003', ...fmc(3), ...reg({ mv_file_no: '1301-00000709253', engine_no: 'W04DTN40100', body_type: 'Aluminum Van', gross_weight: 8300, net_capacity: 4150 }) },
+    { id: 'TRK-004', plate_number: 'NAL 2498', make: 'Hino', model: 'FG8J', year: 2017, vin: 'FG8J17888', status: 'active', fuel_capacity: 300, current_fuel_level: 72, odometer: 125000, gps_device_id: 'GPS-004', ...fmc(4), ...reg({ mv_file_no: '1301-00000888224', engine_no: 'J08EUG16370', body_type: 'Aluminum Van', gross_weight: 15100, net_capacity: 7550 }) },
+    { id: 'TRK-005', plate_number: 'ZBJ-997', make: 'Isuzu', model: 'NQR', year: 2005, vin: 'PABN1R71RL5200178', status: 'maintenance', fuel_capacity: 200, current_fuel_level: 30, odometer: 312000, gps_device_id: 'GPS-005', ...fmc(5), ...reg({ mv_file_no: '1368-00000211528', engine_no: '4HG1-237797', body_type: 'Aluminum Van', gross_weight: 8000, net_capacity: 4000 }) },
+    { id: 'TRK-006', plate_number: 'NQO-721', make: 'Isuzu', model: 'ELF (Rebuilt)', year: 2009, vin: 'ENKR-20080481-C', status: 'active', fuel_capacity: 100, current_fuel_level: 82, odometer: 245000, gps_device_id: 'GPS-006', ...fmc(6), ...reg({ mv_file_no: '1312-00000355611', engine_no: '4HF1-520664', body_type: 'Aluminum Van', gross_weight: 4200, net_capacity: 2100 }) },
+    { id: 'TRK-007', plate_number: 'NAZ 4573', make: 'Isuzu', model: 'FRR', year: 2016, vin: 'FRR35T4-7000044', status: 'idle', fuel_capacity: 200, current_fuel_level: 45, odometer: 142000, gps_device_id: 'GPS-007', ...fmc(7), ...reg({ mv_file_no: '1301-00000976492', engine_no: '6HL1-339662', body_type: 'Aluminum Van', gross_weight: 8500, net_capacity: 4250 }) },
+    { id: 'TRK-008', plate_number: 'NDN 3363', make: 'Hino', model: 'Profia', year: 2018, vin: 'PN2PWJ-11674', status: 'active', fuel_capacity: 400, current_fuel_level: 68, odometer: 98000, gps_device_id: 'GPS-008', ...fmc(8), ...reg({ mv_file_no: '1301-00001415161', engine_no: 'P11C-UD12953', body_type: 'Canvass Wing Van', gross_weight: 24000, net_capacity: 12000 }) },
+    { id: 'TRK-009', plate_number: 'CBR 1147', make: 'Isuzu', model: 'Forward (Rebuilt)', year: 2022, vin: 'FSD34T4-7000116', status: 'active', fuel_capacity: 200, current_fuel_level: 88, odometer: 38000, gps_device_id: 'GPS-009', ...fmc(9), ...reg({ mv_file_no: '0389-00000038273', engine_no: '6HK1-424771', body_type: 'Close Van', gross_weight: 8500, net_capacity: 4250 }) },
+    { id: 'TRK-010', plate_number: 'NGF 9660', make: 'Hino', model: 'Profia', year: 2018, vin: 'FN2PWJ-12186', status: 'active', fuel_capacity: 400, current_fuel_level: 52, odometer: 105000, gps_device_id: 'GPS-010', ...fmc(10), ...reg({ mv_file_no: '1301-00001440445', engine_no: 'P11C-UD13854', body_type: 'Aluminum Wing Van', gross_weight: 24000, net_capacity: 12000 }) },
+    { id: 'TRK-011', plate_number: 'NGX 3840', make: 'Isuzu', model: 'GIGA', year: 2020, vin: 'CXG77X8-7000117', status: 'active', fuel_capacity: 400, current_fuel_level: 61, odometer: 78000, gps_device_id: 'GPS-011', ...fmc(11), ...reg({ mv_file_no: '130100001797092', engine_no: '6UZ1-419625', body_type: 'Aluminum Closed Van', gross_weight: 24000, net_capacity: 12000 }) },
+    { id: 'TRK-012', plate_number: 'NFY 8062', make: 'Isuzu', model: 'GIGA', year: 2018, vin: 'CYG51Y5Z-7000020', status: 'active', fuel_capacity: 400, current_fuel_level: 74, odometer: 115000, gps_device_id: 'GPS-012', ...fmc(12), ...reg({ mv_file_no: '130100001534313', engine_no: '6WF1-135287', body_type: 'Aluminum Van', gross_weight: 24000, net_capacity: 12000 }) },
+    { id: 'TRK-013', plate_number: 'CBF 2015', make: 'Isuzu', model: 'FTR (Rebuilt)', year: 2023, vin: 'FTR34-7001940', status: 'idle', fuel_capacity: 200, current_fuel_level: 90, odometer: 22000, gps_device_id: 'GPS-013', ...fmc(13), ...reg({ mv_file_no: '038900000067378', engine_no: '6HK1-476777', body_type: 'Closed Van', gross_weight: 8500, net_capacity: 4250 }) },
+    { id: 'TRK-014', plate_number: 'CCE 5647', make: 'Isuzu', model: 'Forward', year: 2025, vin: 'FRDS4V4-7000070', status: 'active', fuel_capacity: 200, current_fuel_level: 95, odometer: 5200, gps_device_id: 'GPS-014', ...fmc(14), ...reg({ mv_file_no: '0389-00000078338', engine_no: '6HK1-442949', body_type: 'Aluminum Van', gross_weight: 8500, net_capacity: 4250 }) },
+    { id: 'TRK-015', plate_number: 'CCE 5649', make: 'Isuzu', model: 'Forward', year: 2023, vin: 'FRD34T4-7000228', status: 'active', fuel_capacity: 200, current_fuel_level: 70, odometer: 32000, gps_device_id: 'GPS-015', ...fmc(15), ...reg({ mv_file_no: '038900000078340', engine_no: '6HK1-448424', body_type: 'Wing Van', gross_weight: 8500, net_capacity: 4250 }) },
   ];
 
   await knex('trucks').insert(truckData);

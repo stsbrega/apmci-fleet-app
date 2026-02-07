@@ -305,6 +305,7 @@ function DevicesPage() {
                   <th>Truck ID</th>
                   <th>Plate Number</th>
                   <th>Make/Model</th>
+                  <th>Body Type</th>
                   <th>Driver</th>
                   <th>Status</th>
                   <th>Action</th>
@@ -316,6 +317,7 @@ function DevicesPage() {
                     <td className="truck-id">{truck.id}</td>
                     <td>{truck.plate_number}</td>
                     <td>{truck.make} {truck.model}</td>
+                    <td>{truck.body_type || '-'}</td>
                     <td>{truck.driver_name || <span className="muted">Unassigned</span>}</td>
                     <td>
                       <span className={`status-badge ${truck.status}`}>{truck.status}</span>
