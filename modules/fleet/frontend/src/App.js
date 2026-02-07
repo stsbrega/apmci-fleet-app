@@ -4,6 +4,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { useSocket } from './hooks/useSocket';
 import { trucksAPI, alertsAPI } from './services/api';
 import Login from './components/Login';
+import FleetPage from './components/FleetPage';
 import DriversPage from './components/DriversPage';
 import MaintenancePage from './components/MaintenancePage';
 import DevicesPage from './components/DevicesPage';
@@ -662,6 +663,8 @@ function Dashboard() {
     switch (activeView) {
       case 'dashboard':
         return renderDashboard();
+      case 'fleet':
+        return <FleetPage />;
       case 'fuel':
         return renderFuelTracking();
       case 'drivers':
@@ -721,6 +724,13 @@ function Dashboard() {
         >
           <span>📊</span>
           <span>Dashboard</span>
+        </div>
+        <div
+          className={`nav-item ${activeView === 'fleet' ? 'active' : ''}`}
+          onClick={() => handleNavClick('fleet')}
+        >
+          <span>🚛</span>
+          <span>Fleet Inventory</span>
         </div>
         <div
           className={`nav-item ${activeView === 'fuel' ? 'active' : ''}`}
@@ -785,7 +795,7 @@ function Dashboard() {
       </div>
 
       <div className="main-content">
-        {activeView !== 'drivers' && activeView !== 'maintenance' && activeView !== 'devices' && activeView !== 'candata' && (
+        {activeView !== 'fleet' && activeView !== 'drivers' && activeView !== 'maintenance' && activeView !== 'devices' && activeView !== 'candata' && (
           <div className="header">
             <h1>{getPageTitle().title}</h1>
             <p>{getPageTitle().subtitle}</p>
