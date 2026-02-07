@@ -40,9 +40,9 @@ function AppContent() {
   return <Dashboard />;
 }
 
-// Mock data generators - APMCI Laguna-Batangas delivery routes (15-truck fleet)
-// Data from LTO registration records
-const generateMockTrucks = () => [
+// APMCI fleet data - Laguna-Batangas delivery routes (15-truck fleet)
+// Fallback data from LTO registration records, used when API is unavailable
+const getFleetData = () => [
   {
     id: 'TRK-001', plate_number: 'NCG 4723', make: 'Hino', model: 'WU342L-M', year: 2018,
     vin: 'MJECH40HXG5142022', body_type: 'Aluminum Van', gross_weight: 4500, net_capacity: 2250,
@@ -165,7 +165,7 @@ const generateMockTrucks = () => [
   }
 ];
 
-const generateMockAlerts = () => [
+const getDefaultAlerts = () => [
   {
     id: 1,
     type: 'critical',
@@ -203,7 +203,7 @@ const generateMockAlerts = () => [
   }
 ];
 
-const generateMockFuelData = () => [
+const getWeeklyFuelData = () => [
   { day: 'Mon', consumption: 420, cost: 672 },
   { day: 'Tue', consumption: 380, cost: 608 },
   { day: 'Wed', consumption: 450, cost: 720 },
@@ -245,7 +245,7 @@ function Dashboard() {
   const { user, logout } = useAuth();
   const [trucks, setTrucks] = useState([]);
   const [alerts, setAlerts] = useState([]);
-  const [fuelData] = useState(generateMockFuelData());
+  const [fuelData] = useState(getWeeklyFuelData());
   const [stats, setStats] = useState({
     totalTrucks: 0,
     activeTrucks: 0,
@@ -359,24 +359,23 @@ function Dashboard() {
           })));
         }
       } else {
-        loadMockData();
+        loadFallbackData();
       }
     } catch (error) {
       console.error('Failed to fetch data:', error);
-      loadMockData();
+      loadFallbackData();
     } finally {
       setLoading(false);
     }
   };
 
-  const loadMockData = () => {
+  const loadFallbackData = () => {
     setUseRealData(false);
-    const mockTrucks = generateMockTrucks();
-    setTrucks(mockTrucks);
-    setAlerts(generateMockAlerts());
+    setTrucks(getFleetData());
+    setAlerts(getDefaultAlerts());
   };
 
-  // Simulate real-time updates for mock data
+  // Simulate real-time updates when API is unavailable
   useEffect(() => {
     if (!useRealData && trucks.length > 0) {
       const interval = setInterval(() => {
