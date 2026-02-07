@@ -14,11 +14,12 @@ const API_PORT = 5000;
 const API_PATH = '/api/gps';
 const API_KEY = 'gps_device_key_2024';
 
-// Actual APMCI delivery routes: Laguna Factory to Yamaha (LIMA Technopark, Batangas)
+// Actual APMCI delivery routes: 15-truck fleet across Laguna-Batangas-Cavite
 const routes = {
   'TRK-001': {
     name: 'Calamba → LIMA Technopark (Yamaha Delivery)',
     driver: 'Juan Dela Cruz',
+    plate: 'NCG 4723',
     waypoints: [
       { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
       { lat: 14.2080, lng: 121.1590, city: 'Calamba City Proper' },
@@ -36,6 +37,7 @@ const routes = {
   'TRK-002': {
     name: 'LIMA Technopark → Calamba (Return Trip)',
     driver: 'Maria Santos',
+    plate: 'NDF 7968',
     waypoints: [
       { lat: 13.9550, lng: 121.0400, city: 'Yamaha Motor Philippines' },
       { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark Exit' },
@@ -51,22 +53,22 @@ const routes = {
     ]
   },
   'TRK-003': {
-    name: 'Cabuyao → LIMA (Via SLEX)',
+    name: 'Calamba → Tanauan (Via SLEX)',
     driver: 'Pedro Reyes',
+    plate: 'NCF-2403',
     waypoints: [
-      { lat: 14.2725, lng: 121.1250, city: 'Cabuyao, Laguna' },
-      { lat: 14.2500, lng: 121.1300, city: 'Cabuyao SLEX Entry' },
-      { lat: 14.2114, lng: 121.1500, city: 'Passing Calamba' },
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.1950, lng: 121.1480, city: 'Calamba SLEX Entry' },
       { lat: 14.1750, lng: 121.1350, city: 'SLEX - Southbound' },
-      { lat: 14.1100, lng: 121.1050, city: 'Sto. Tomas Exit' },
-      { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
-      { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
-      { lat: 13.9550, lng: 121.0400, city: 'Yamaha Motor Philippines' },
+      { lat: 14.1100, lng: 121.1050, city: 'Sto. Tomas, Batangas' },
+      { lat: 14.0750, lng: 121.0900, city: 'Tanauan City' },
+      { lat: 14.0600, lng: 121.0800, city: 'Tanauan Delivery Point' },
     ]
   },
   'TRK-004': {
     name: 'Calamba → Los Baños (Local Delivery)',
     driver: 'Ana Garcia',
+    plate: 'NAL 2498',
     waypoints: [
       { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
       { lat: 14.2000, lng: 121.1800, city: 'Pansol, Calamba' },
@@ -79,6 +81,7 @@ const routes = {
   'TRK-005': {
     name: 'Maintenance - APMCI Service Bay',
     driver: 'Jose Mendoza',
+    plate: 'ZBJ-997',
     status: 'maintenance',
     waypoints: [
       { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory - Service Bay' },
@@ -87,6 +90,7 @@ const routes = {
   'TRK-006': {
     name: 'Calamba → Silang, Cavite',
     driver: 'Rosa Villanueva',
+    plate: 'NQO-721',
     waypoints: [
       { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
       { lat: 14.2100, lng: 121.1400, city: 'Calamba Junction' },
@@ -94,6 +98,119 @@ const routes = {
       { lat: 14.2250, lng: 121.0800, city: 'Silang Boundary' },
       { lat: 14.2350, lng: 121.0500, city: 'Silang, Cavite' },
       { lat: 14.2400, lng: 121.0300, city: 'Silang Delivery Point' },
+    ]
+  },
+  'TRK-007': {
+    name: 'Idle - APMCI Factory',
+    driver: 'Carlos Ramos',
+    plate: 'NAZ 4573',
+    status: 'idle',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+    ]
+  },
+  'TRK-008': {
+    name: 'Calamba → Lipa City (Batangas Delivery)',
+    driver: 'Elena Flores',
+    plate: 'NDN 3363',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.1950, lng: 121.1480, city: 'Calamba SLEX Entry' },
+      { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
+      { lat: 14.0750, lng: 121.0900, city: 'Tanauan City' },
+      { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
+      { lat: 14.0000, lng: 121.0550, city: 'Malvar, Batangas' },
+      { lat: 13.9400, lng: 121.0300, city: 'Lipa City Approach' },
+      { lat: 13.8800, lng: 121.0200, city: 'Lipa City, Batangas' },
+    ]
+  },
+  'TRK-009': {
+    name: 'Cabuyao → Biñan (Local Delivery)',
+    driver: 'Miguel Torres',
+    plate: 'CBR 1147',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.2400, lng: 121.1500, city: 'Calamba-Cabuyao Boundary' },
+      { lat: 14.2725, lng: 121.1250, city: 'Cabuyao, Laguna' },
+      { lat: 14.3000, lng: 121.1100, city: 'Cabuyao Industrial Zone' },
+      { lat: 14.3300, lng: 121.0800, city: 'Biñan, Laguna' },
+      { lat: 14.3500, lng: 121.0650, city: 'Biñan Delivery Point' },
+    ]
+  },
+  'TRK-010': {
+    name: 'Biñan → Santa Rosa (Laguna Loop)',
+    driver: 'Sofia Aquino',
+    plate: 'NGF 9660',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.2400, lng: 121.1500, city: 'Calamba-Cabuyao Boundary' },
+      { lat: 14.2725, lng: 121.1250, city: 'Cabuyao, Laguna' },
+      { lat: 14.3100, lng: 121.1100, city: 'Santa Rosa Entry' },
+      { lat: 14.3300, lng: 121.0700, city: 'Santa Rosa, Laguna' },
+      { lat: 14.3500, lng: 121.0450, city: 'Santa Rosa Industrial' },
+    ]
+  },
+  'TRK-011': {
+    name: 'LIMA → Lipa → Batangas City',
+    driver: 'Roberto Cruz',
+    plate: 'NGX 3840',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
+      { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
+      { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
+      { lat: 13.8800, lng: 121.0200, city: 'Lipa City, Batangas' },
+      { lat: 13.7900, lng: 121.0000, city: 'Batangas City Approach' },
+      { lat: 13.7560, lng: 121.0585, city: 'Batangas City' },
+    ]
+  },
+  'TRK-012': {
+    name: 'Calamba → Sto. Tomas → Tanauan',
+    driver: 'Patricia Lim',
+    plate: 'NFY 8062',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.1950, lng: 121.1480, city: 'Calamba SLEX Entry' },
+      { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
+      { lat: 14.1100, lng: 121.1050, city: 'Sto. Tomas, Batangas' },
+      { lat: 14.0900, lng: 121.0950, city: 'Sto. Tomas Industrial' },
+      { lat: 14.0750, lng: 121.0900, city: 'Tanauan City' },
+    ]
+  },
+  'TRK-013': {
+    name: 'Idle - APMCI Factory',
+    driver: 'Dennis Reyes',
+    plate: 'CBF 2015',
+    status: 'idle',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+    ]
+  },
+  'TRK-014': {
+    name: 'Santa Rosa → Calamba (New Truck)',
+    driver: 'Grace Navarro',
+    plate: 'CCE 5647',
+    waypoints: [
+      { lat: 14.3100, lng: 121.0550, city: 'Santa Rosa, Laguna' },
+      { lat: 14.2900, lng: 121.0800, city: 'Santa Rosa Exit' },
+      { lat: 14.2725, lng: 121.1000, city: 'Cabuyao Bypass' },
+      { lat: 14.2500, lng: 121.1300, city: 'Cabuyao, Laguna' },
+      { lat: 14.2300, lng: 121.1500, city: 'Calamba North' },
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+    ]
+  },
+  'TRK-015': {
+    name: 'Calamba → Malvar → LIMA Technopark',
+    driver: 'Mark Villanueva',
+    plate: 'CCE 5649',
+    waypoints: [
+      { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+      { lat: 14.1950, lng: 121.1480, city: 'Calamba SLEX Entry' },
+      { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
+      { lat: 14.0750, lng: 121.0900, city: 'Tanauan City' },
+      { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
+      { lat: 14.0000, lng: 121.0550, city: 'Malvar, Batangas' },
+      { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
     ]
   }
 };
@@ -115,10 +232,14 @@ Object.keys(routes).forEach(truckId => {
   };
 });
 
-// Set TRK-005 to maintenance
+// Set stationary trucks
 truckState['TRK-005'].status = 'maintenance';
 truckState['TRK-005'].speed = 0;
 truckState['TRK-005'].fuel = 30;
+truckState['TRK-007'].status = 'idle';
+truckState['TRK-007'].speed = 0;
+truckState['TRK-013'].status = 'idle';
+truckState['TRK-013'].speed = 0;
 
 // Interpolate between two points
 function interpolate(p1, p2, t) {
@@ -193,17 +314,18 @@ function updateTruck(truckId) {
   const route = routes[truckId];
   const state = truckState[truckId];
 
-  // Skip if maintenance
-  if (state.status === 'maintenance') {
+  // Skip if maintenance or idle
+  if (state.status === 'maintenance' || state.status === 'idle') {
     const waypoint = route.waypoints[0];
+    const statusLabel = state.status === 'maintenance' ? 'Maintenance' : 'Idle';
     sendGpsData(truckId, {
       lat: waypoint.lat,
       lng: waypoint.lng,
       speed: 0,
       heading: 0,
       fuel: state.fuel,
-      city: waypoint.city + ' (Maintenance)',
-      route: 'Under Maintenance'
+      city: waypoint.city + ` (${statusLabel})`,
+      route: state.status === 'maintenance' ? 'Under Maintenance' : 'Idle - Awaiting Dispatch'
     });
     return;
   }
@@ -275,14 +397,15 @@ function runSimulation() {
   console.log('   Atlantic Plastics & Metal Crafts, Inc.');
   console.log('=====================================================');
   console.log('');
-  console.log('Routes (Laguna-Batangas Area):');
+  console.log('Fleet (15 trucks - Laguna-Batangas-Cavite Area):');
   Object.keys(routes).forEach(truckId => {
     const route = routes[truckId];
-    const status = route.status === 'maintenance' ? ' [MAINTENANCE]' : '';
-    console.log(`  ${truckId}: ${route.name}${status}`);
+    const statusTag = route.status === 'maintenance' ? ' [MAINTENANCE]' :
+                      route.status === 'idle' ? ' [IDLE]' : '';
+    console.log(`  ${truckId} (${route.plate}): ${route.name}${statusTag}`);
   });
   console.log('');
-  console.log('GPS Device: Teltonika FMC250 (4G LTE, IP67)');
+  console.log('GPS Device: Teltonika FMC150 (4G LTE Cat 1, CAN Bus, IP67)');
   console.log('Update Interval: 10 seconds');
   console.log('');
 
