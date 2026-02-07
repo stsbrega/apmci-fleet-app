@@ -3,7 +3,7 @@ import { canAPI, trucksAPI } from '../services/api';
 import './CanDataPage.css';
 
 function CanDataPage() {
-  const [trucks, setTrucks] = useState([]);
+  const [, setTrucks] = useState([]);
   const [fleetCanData, setFleetCanData] = useState([]);
   const [selectedTruck, setSelectedTruck] = useState(null);
   const [truckStats, setTruckStats] = useState(null);
