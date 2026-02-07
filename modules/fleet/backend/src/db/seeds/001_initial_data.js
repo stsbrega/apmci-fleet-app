@@ -16,6 +16,11 @@ exports.seed = async function(knex) {
   await knex('alerts').del();
   await knex('maintenance_records').del();
   await knex('fuel_records').del();
+  // Clear CAN data if table exists
+  const hasCanTable = await knex.schema.hasTable('can_data');
+  if (hasCanTable) {
+    await knex('can_data').del();
+  }
   await knex('gps_data').del();
   await knex('drivers').del();
   await knex('trucks').del();
@@ -40,8 +45,12 @@ exports.seed = async function(knex) {
     }
   ]);
 
-  // Create trucks
-  await knex('trucks').insert([
+  // Check if new columns exist (from FMC150 migration)
+  const hasDeviceModel = await knex.schema.hasColumn('trucks', 'gps_device_model');
+
+  // Create trucks with FMC150 device assignments
+  // IMEIs are placeholders - will be updated with actual FMC150 IMEIs upon delivery
+  const truckData = [
     {
       id: 'TRK-001',
       plate_number: 'ABC-1234',
@@ -53,7 +62,12 @@ exports.seed = async function(knex) {
       fuel_capacity: 400,
       current_fuel_level: 78,
       odometer: 45230,
-      gps_device_id: 'GPS-001'
+      gps_device_id: 'GPS-001',
+      ...(hasDeviceModel && {
+        gps_device_model: 'FMC150',
+        gps_device_imei: '352625090000001',
+        gps_protocol: 'tcp_codec8e'
+      })
     },
     {
       id: 'TRK-002',
@@ -66,7 +80,12 @@ exports.seed = async function(knex) {
       fuel_capacity: 380,
       current_fuel_level: 92,
       odometer: 38920,
-      gps_device_id: 'GPS-002'
+      gps_device_id: 'GPS-002',
+      ...(hasDeviceModel && {
+        gps_device_model: 'FMC150',
+        gps_device_imei: '352625090000002',
+        gps_protocol: 'tcp_codec8e'
+      })
     },
     {
       id: 'TRK-003',
@@ -79,7 +98,12 @@ exports.seed = async function(knex) {
       fuel_capacity: 350,
       current_fuel_level: 45,
       odometer: 52100,
-      gps_device_id: 'GPS-003'
+      gps_device_id: 'GPS-003',
+      ...(hasDeviceModel && {
+        gps_device_model: 'FMC150',
+        gps_device_imei: '352625090000003',
+        gps_protocol: 'tcp_codec8e'
+      })
     },
     {
       id: 'TRK-004',
@@ -92,7 +116,12 @@ exports.seed = async function(knex) {
       fuel_capacity: 420,
       current_fuel_level: 68,
       odometer: 41500,
-      gps_device_id: 'GPS-004'
+      gps_device_id: 'GPS-004',
+      ...(hasDeviceModel && {
+        gps_device_model: 'FMC150',
+        gps_device_imei: '352625090000004',
+        gps_protocol: 'tcp_codec8e'
+      })
     },
     {
       id: 'TRK-005',
@@ -105,7 +134,12 @@ exports.seed = async function(knex) {
       fuel_capacity: 360,
       current_fuel_level: 30,
       odometer: 67800,
-      gps_device_id: 'GPS-005'
+      gps_device_id: 'GPS-005',
+      ...(hasDeviceModel && {
+        gps_device_model: 'FMC150',
+        gps_device_imei: '352625090000005',
+        gps_protocol: 'tcp_codec8e'
+      })
     },
     {
       id: 'TRK-006',
@@ -118,9 +152,16 @@ exports.seed = async function(knex) {
       fuel_capacity: 390,
       current_fuel_level: 85,
       odometer: 34200,
-      gps_device_id: 'GPS-006'
+      gps_device_id: 'GPS-006',
+      ...(hasDeviceModel && {
+        gps_device_model: 'FMC150',
+        gps_device_imei: '352625090000006',
+        gps_protocol: 'tcp_codec8e'
+      })
     }
-  ]);
+  ];
+
+  await knex('trucks').insert(truckData);
 
   // Create drivers
   await knex('drivers').insert([
@@ -348,6 +389,45 @@ exports.seed = async function(knex) {
       metadata: JSON.stringify({ speed: 118, location: 'STAR Tollway' })
     }
   ]);
+
+  // Seed sample CAN bus data (if table exists from FMC150 migration)
+  if (hasCanTable) {
+    const canData = [];
+    const canTrucks = ['TRK-001', 'TRK-002', 'TRK-003', 'TRK-004', 'TRK-006'];
+
+    for (const truckId of canTrucks) {
+      const truckIndex = parseInt(truckId.split('-')[1]);
+      const imei = `35262509000000${truckIndex}`;
+
+      // Generate last 12 hours of CAN data (every 30 min)
+      for (let h = 11; h >= 0; h--) {
+        const recordTime = new Date(now.getTime() - h * 30 * 60 * 1000);
+        const isMoving = truckId !== 'TRK-003' || h > 4; // TRK-003 is idle
+
+        canData.push({
+          truck_id: truckId,
+          device_imei: imei,
+          engine_rpm: isMoving ? 1200 + Math.floor(Math.random() * 1200) : 700 + Math.floor(Math.random() * 100),
+          engine_coolant_temp: 75 + Math.random() * 15,
+          engine_load: isMoving ? 30 + Math.random() * 40 : 5 + Math.random() * 10,
+          fuel_level_can: 40 + Math.random() * 50,
+          fuel_rate: isMoving ? 8 + Math.random() * 12 : 1 + Math.random() * 2,
+          vehicle_speed_can: isMoving ? 40 + Math.random() * 50 : 0,
+          accelerator_pedal_pos: isMoving ? 20 + Math.random() * 60 : 0,
+          battery_voltage: 13.2 + Math.random() * 1.2,
+          total_distance: 30000 + truckIndex * 5000 + h * 15,
+          intake_air_temp: 28 + Math.random() * 8,
+          engine_oil_pressure: 200 + Math.random() * 150,
+          ambient_air_temp: 30 + Math.random() * 5,
+          dtc_count: 0,
+          recorded_at: recordTime
+        });
+      }
+    }
+
+    await knex('can_data').insert(canData);
+    console.log(`Seeded ${canData.length} CAN data records for FMC150 devices.`);
+  }
 
   console.log('Seed data inserted successfully!');
 };

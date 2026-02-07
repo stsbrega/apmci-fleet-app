@@ -15,9 +15,13 @@ const gpsRoutes = require('./routes/gps');
 const fuelRoutes = require('./routes/fuel');
 const maintenanceRoutes = require('./routes/maintenance');
 const alertsRoutes = require('./routes/alerts');
+const canDataRoutes = require('./routes/canData');
 
 // Import socket service
 const { initializeSocket } = require('./services/socketService');
+
+// Import Teltonika TCP server for FMC150 devices
+const { createTeltonikaTcpServer } = require('./services/teltonikaTcpServer');
 
 const app = express();
 const server = http.createServer(app);
@@ -59,6 +63,7 @@ app.use('/api/gps', gpsRoutes);
 app.use('/api/fuel', fuelRoutes);
 app.use('/api/maintenance', maintenanceRoutes);
 app.use('/api/alerts', alertsRoutes);
+app.use('/api/can', canDataRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -81,6 +86,10 @@ const PORT = process.env.PORT || 5000;
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
   console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+
+  // Start Teltonika TCP server for FMC150 devices
+  const tcpServer = createTeltonikaTcpServer();
+  console.log('Teltonika FMC150 TCP server initialized');
 });
 
 module.exports = { app, server, io };

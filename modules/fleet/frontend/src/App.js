@@ -7,6 +7,7 @@ import Login from './components/Login';
 import DriversPage from './components/DriversPage';
 import MaintenancePage from './components/MaintenancePage';
 import DevicesPage from './components/DevicesPage';
+import CanDataPage from './components/CanDataPage';
 import MapView from './components/MapView';
 import './App.css';
 
@@ -591,6 +592,8 @@ function Dashboard() {
         return <MaintenancePage />;
       case 'devices':
         return <DevicesPage />;
+      case 'candata':
+        return <CanDataPage />;
       default:
         return renderDashboard();
     }
@@ -673,6 +676,13 @@ function Dashboard() {
           <span>📡</span>
           <span>GPS Devices</span>
         </div>
+        <div
+          className={`nav-item ${activeView === 'candata' ? 'active' : ''}`}
+          onClick={() => handleNavClick('candata')}
+        >
+          <span>🔌</span>
+          <span>CAN Bus Data</span>
+        </div>
         <div className="nav-item disabled">
           <span>📈</span>
           <span>Reports</span>
@@ -697,7 +707,7 @@ function Dashboard() {
       </div>
 
       <div className="main-content">
-        {activeView !== 'drivers' && activeView !== 'maintenance' && activeView !== 'devices' && (
+        {activeView !== 'drivers' && activeView !== 'maintenance' && activeView !== 'devices' && activeView !== 'candata' && (
           <div className="header">
             <h1>{getPageTitle().title}</h1>
             <p>{getPageTitle().subtitle}</p>
