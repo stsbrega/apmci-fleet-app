@@ -43,169 +43,109 @@ function AppContent() {
 // Mock data generators - APMCI Laguna-Batangas delivery routes (15-truck fleet)
 const generateMockTrucks = () => [
   {
-    id: 'TRK-001',
-    driver: 'Juan Dela Cruz',
-    status: 'active',
+    id: 'TRK-001', plate_number: 'NCG 4723', make: 'Hino', model: 'WU342L-M', year: 2018, vin: 'MJECH40HXG5142022',
+    driver: 'Juan Dela Cruz', status: 'active',
     location: { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
-    fuel: 78,
-    speed: 85,
-    mileage: 125000,
-    lastUpdate: '2 min ago',
+    fuel: 78, speed: 85, mileage: 112000, lastUpdate: '2 min ago',
     route: 'Calamba → LIMA Technopark (Yamaha Delivery)'
   },
   {
-    id: 'TRK-002',
-    driver: 'Maria Santos',
-    status: 'active',
+    id: 'TRK-002', plate_number: 'NDF 7968', make: 'Hino', model: 'WU342L-M', year: 2016, vin: 'MJECH40H1G5142023',
+    driver: 'Maria Santos', status: 'active',
     location: { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
-    fuel: 72,
-    speed: 90,
-    mileage: 165000,
-    lastUpdate: '1 min ago',
+    fuel: 65, speed: 70, mileage: 148000, lastUpdate: '1 min ago',
     route: 'LIMA Technopark → Calamba (Return Trip)'
   },
   {
-    id: 'TRK-003',
-    driver: 'Pedro Reyes',
-    status: 'active',
-    location: { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
-    fuel: 65,
-    speed: 25,
-    mileage: 180000,
-    lastUpdate: '3 min ago',
+    id: 'TRK-003', plate_number: 'NCF-2403', make: 'Hino', model: 'WU730L', year: 2016, vin: 'JHHZJL0H102000313',
+    driver: 'Pedro Reyes', status: 'active',
+    location: { lat: 14.0858, lng: 121.1528, city: 'Tanauan, Batangas' },
+    fuel: 55, speed: 55, mileage: 156000, lastUpdate: '3 min ago',
     route: 'Calamba → Tanauan (Via SLEX)'
   },
   {
-    id: 'TRK-004',
-    driver: 'Ana Garcia',
-    status: 'active',
-    location: { lat: 14.1700, lng: 121.2200, city: 'Los Baños Proper' },
-    fuel: 68,
-    speed: 40,
-    mileage: 155000,
-    lastUpdate: '3 min ago',
-    route: 'Calamba → Los Baños (Local Delivery)'
+    id: 'TRK-004', plate_number: 'NAL 2498', make: 'Hino', model: 'FG8J', year: 2017, vin: 'FG8J17888',
+    driver: 'Ana Garcia', status: 'active',
+    location: { lat: 13.7565, lng: 121.0584, city: 'Batangas Port' },
+    fuel: 72, speed: 45, mileage: 125000, lastUpdate: '3 min ago',
+    route: 'Calamba → Batangas Port'
   },
   {
-    id: 'TRK-005',
-    driver: 'Jose Mendoza',
-    status: 'maintenance',
+    id: 'TRK-005', plate_number: 'ZBJ-997', make: 'Isuzu', model: 'NQR', year: 2005, vin: 'PABN1R71RL5200178',
+    driver: 'Jose Mendoza', status: 'maintenance',
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory - Service Bay' },
-    fuel: 30,
-    speed: 0,
-    mileage: 385000,
-    lastUpdate: '2 hours ago',
+    fuel: 30, speed: 0, mileage: 312000, lastUpdate: '2 hours ago',
     route: 'Under Maintenance'
   },
   {
-    id: 'TRK-006',
-    driver: 'Rosa Villanueva',
-    status: 'active',
-    location: { lat: 14.2250, lng: 121.0800, city: 'Silang Boundary' },
-    fuel: 85,
-    speed: 45,
-    mileage: 280000,
-    lastUpdate: '4 min ago',
-    route: 'Calamba → Silang, Cavite'
+    id: 'TRK-006', plate_number: 'NQO-721', make: 'Isuzu', model: 'ELF', year: 2009, vin: 'ENKR-20080481-C',
+    driver: 'Rosa Villanueva', status: 'active',
+    location: { lat: 14.1700, lng: 121.2200, city: 'Los Baños, Laguna' },
+    fuel: 82, speed: 40, mileage: 245000, lastUpdate: '4 min ago',
+    route: 'Calamba → Los Baños'
   },
   {
-    id: 'TRK-007',
-    driver: 'Carlos Ramos',
-    status: 'idle',
+    id: 'TRK-007', plate_number: 'NAZ 4573', make: 'Isuzu', model: 'FRR', year: 2016, vin: 'FRR35T4-7000044',
+    driver: 'Ricardo Bautista', status: 'idle',
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
-    fuel: 90,
-    speed: 0,
-    mileage: 160000,
-    lastUpdate: '1 hour ago',
+    fuel: 45, speed: 0, mileage: 142000, lastUpdate: '1 hour ago',
     route: 'Idle - Awaiting Dispatch'
   },
   {
-    id: 'TRK-008',
-    driver: 'Elena Flores',
-    status: 'active',
-    location: { lat: 14.0750, lng: 121.0900, city: 'Tanauan City' },
-    fuel: 62,
-    speed: 75,
-    mileage: 140000,
-    lastUpdate: '2 min ago',
-    route: 'Calamba → Lipa City (Batangas Delivery)'
+    id: 'TRK-008', plate_number: 'NDN 3363', make: 'Hino', model: 'Profia', year: 2018, vin: 'PN2PWJ-11674',
+    driver: 'Eduardo Ramos', status: 'active',
+    location: { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
+    fuel: 68, speed: 25, mileage: 98000, lastUpdate: '2 min ago',
+    route: 'Calamba → LIMA (Yamaha Delivery)'
   },
   {
-    id: 'TRK-009',
-    driver: 'Miguel Torres',
-    status: 'active',
-    location: { lat: 14.2725, lng: 121.1250, city: 'Cabuyao, Laguna' },
-    fuel: 80,
-    speed: 55,
-    mileage: 65000,
-    lastUpdate: '1 min ago',
-    route: 'Cabuyao → Biñan (Local Delivery)'
+    id: 'TRK-009', plate_number: 'CBR 1147', make: 'Isuzu', model: 'Forward', year: 2022, vin: 'FSD34T4-7000116',
+    driver: 'Fernando Torres', status: 'active',
+    location: { lat: 14.3134, lng: 121.1110, city: 'Santa Rosa, Laguna' },
+    fuel: 88, speed: 50, mileage: 38000, lastUpdate: '1 min ago',
+    route: 'Santa Rosa → Calamba'
   },
   {
-    id: 'TRK-010',
-    driver: 'Sofia Aquino',
-    status: 'active',
-    location: { lat: 14.3500, lng: 121.0450, city: 'Biñan, Laguna' },
-    fuel: 55,
-    speed: 60,
-    mileage: 135000,
-    lastUpdate: '3 min ago',
-    route: 'Biñan → Santa Rosa (Laguna Loop)'
+    id: 'TRK-010', plate_number: 'NGF 9660', make: 'Hino', model: 'Profia', year: 2018, vin: 'FN2PWJ-12186',
+    driver: 'Miguel Aquino', status: 'active',
+    location: { lat: 13.8472, lng: 121.2087, city: 'Rosario, Batangas' },
+    fuel: 52, speed: 60, mileage: 105000, lastUpdate: '3 min ago',
+    route: 'Rosario → Calamba (Return)'
   },
   {
-    id: 'TRK-011',
-    driver: 'Roberto Cruz',
-    status: 'active',
-    location: { lat: 13.8800, lng: 121.0200, city: 'Lipa City, Batangas' },
-    fuel: 48,
-    speed: 80,
-    mileage: 95000,
-    lastUpdate: '2 min ago',
-    route: 'LIMA → Lipa → Batangas City'
+    id: 'TRK-011', plate_number: 'NGX 3840', make: 'Isuzu', model: 'GIGA', year: 2020, vin: 'CXG77X8-7000117',
+    driver: 'Roberto Cruz', status: 'active',
+    location: { lat: 14.3342, lng: 121.0832, city: 'Biñan, Laguna' },
+    fuel: 61, speed: 55, mileage: 78000, lastUpdate: '2 min ago',
+    route: 'Biñan → Calamba'
   },
   {
-    id: 'TRK-012',
-    driver: 'Patricia Lim',
-    status: 'active',
-    location: { lat: 14.1100, lng: 121.1050, city: 'Sto. Tomas, Batangas' },
-    fuel: 70,
-    speed: 65,
-    mileage: 145000,
-    lastUpdate: '4 min ago',
-    route: 'Calamba → Sto. Tomas → Tanauan'
+    id: 'TRK-012', plate_number: 'NFY 8062', make: 'Isuzu', model: 'GIGA', year: 2018, vin: 'CYG51Y5Z-7000020',
+    driver: 'Carlos Navarro', status: 'active',
+    location: { lat: 13.9414, lng: 121.1622, city: 'Lipa, Batangas' },
+    fuel: 74, speed: 48, mileage: 115000, lastUpdate: '4 min ago',
+    route: 'Calamba → Lipa'
   },
   {
-    id: 'TRK-013',
-    driver: 'Dennis Reyes',
-    status: 'idle',
+    id: 'TRK-013', plate_number: 'CBF 2015', make: 'Isuzu', model: 'FTR', year: 2023, vin: 'FTR34-7001940',
+    driver: 'Danilo Pascual', status: 'idle',
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
-    fuel: 88,
-    speed: 0,
-    mileage: 35000,
-    lastUpdate: '45 min ago',
+    fuel: 90, speed: 0, mileage: 22000, lastUpdate: '45 min ago',
     route: 'Idle - Awaiting Dispatch'
   },
   {
-    id: 'TRK-014',
-    driver: 'Grace Navarro',
-    status: 'active',
-    location: { lat: 14.3100, lng: 121.0550, city: 'Santa Rosa, Laguna' },
-    fuel: 92,
-    speed: 50,
-    mileage: 8000,
-    lastUpdate: '1 min ago',
-    route: 'Santa Rosa → Calamba (New Truck)'
+    id: 'TRK-014', plate_number: 'CCE 5647', make: 'Isuzu', model: 'Forward', year: 2025, vin: 'FRDS4V4-7000070',
+    driver: 'Ernesto Lim', status: 'active',
+    location: { lat: 14.0683, lng: 121.3233, city: 'San Pablo, Laguna' },
+    fuel: 95, speed: 42, mileage: 5200, lastUpdate: '1 min ago',
+    route: 'Calamba → San Pablo'
   },
   {
-    id: 'TRK-015',
-    driver: 'Mark Villanueva',
-    status: 'active',
-    location: { lat: 14.0000, lng: 121.0550, city: 'Malvar, Batangas' },
-    fuel: 60,
-    speed: 70,
-    mileage: 55000,
-    lastUpdate: '2 min ago',
-    route: 'Calamba → Malvar → LIMA Technopark'
+    id: 'TRK-015', plate_number: 'CCE 5649', make: 'Isuzu', model: 'Forward', year: 2023, vin: 'FRD34T4-7000228',
+    driver: 'Gabriel Mercado', status: 'active',
+    location: { lat: 14.2250, lng: 121.0800, city: 'Silang, Cavite' },
+    fuel: 70, speed: 45, mileage: 32000, lastUpdate: '2 min ago',
+    route: 'Calamba → Silang'
   }
 ];
 
@@ -365,6 +305,11 @@ function Dashboard() {
       if (trucksRes && trucksRes.trucks && trucksRes.trucks.length > 0) {
         const formattedTrucks = trucksRes.trucks.map(truck => ({
           id: truck.id,
+          plate_number: truck.plate_number || '',
+          make: truck.make || '',
+          model: truck.model || '',
+          year: truck.year || '',
+          vin: truck.vin || '',
           driver: truck.driver_name || 'Unassigned',
           status: truck.status,
           location: truck.location ? {
@@ -543,12 +488,15 @@ function Dashboard() {
           {trucks.map(truck => (
             <div key={truck.id} className="vehicle-item" onClick={() => setSelectedTruck(truck)}>
               <div className="vehicle-header">
-                <span className="vehicle-name">{truck.id} - {truck.driver}</span>
+                <span className="vehicle-name">
+                  {truck.plate_number || truck.id} - {truck.make} {truck.model} {truck.year ? `(${truck.year})` : ''}
+                </span>
                 <span className={`status-badge ${truck.status}`}>
                   {truck.status.toUpperCase()}
                 </span>
               </div>
               <div className="vehicle-details">
+                <span>🚛 {truck.id} • {truck.driver}</span>
                 <span>📍 {truck.location.city}</span>
                 <span>⛽ {truck.fuel.toFixed(1)}%</span>
                 <span>🚗 {truck.speed} km/h</span>
@@ -629,7 +577,8 @@ function Dashboard() {
           <table>
             <thead>
               <tr>
-                <th>Vehicle ID</th>
+                <th>Plate #</th>
+                <th>Vehicle</th>
                 <th>Driver</th>
                 <th>Fuel Level</th>
                 <th>Distance (km)</th>
@@ -642,7 +591,8 @@ function Dashboard() {
                 const efficiency = (7 + Math.random() * 3).toFixed(1);
                 return (
                   <tr key={truck.id}>
-                    <td className="font-semibold">{truck.id}</td>
+                    <td className="font-semibold">{truck.plate_number || truck.id}</td>
+                    <td>{truck.make} {truck.model} {truck.year ? `(${truck.year})` : ''}</td>
                     <td>{truck.driver}</td>
                     <td>
                       <div className="fuel-cell">
