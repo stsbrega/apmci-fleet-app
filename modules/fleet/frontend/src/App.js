@@ -7,6 +7,7 @@ import Login from './components/Login';
 import DriversPage from './components/DriversPage';
 import MaintenancePage from './components/MaintenancePage';
 import DevicesPage from './components/DevicesPage';
+import CanDataPage from './components/CanDataPage';
 import MapView from './components/MapView';
 import './App.css';
 
@@ -39,7 +40,7 @@ function AppContent() {
   return <Dashboard />;
 }
 
-// Mock data generators - APMCI Laguna-Batangas delivery routes
+// Mock data generators - APMCI Laguna-Batangas delivery routes (15-truck fleet)
 const generateMockTrucks = () => [
   {
     id: 'TRK-001',
@@ -48,7 +49,7 @@ const generateMockTrucks = () => [
     location: { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
     fuel: 78,
     speed: 85,
-    mileage: 45230,
+    mileage: 125000,
     lastUpdate: '2 min ago',
     route: 'Calamba → LIMA Technopark (Yamaha Delivery)'
   },
@@ -59,7 +60,7 @@ const generateMockTrucks = () => [
     location: { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
     fuel: 72,
     speed: 90,
-    mileage: 38920,
+    mileage: 165000,
     lastUpdate: '1 min ago',
     route: 'LIMA Technopark → Calamba (Return Trip)'
   },
@@ -70,9 +71,9 @@ const generateMockTrucks = () => [
     location: { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
     fuel: 65,
     speed: 25,
-    mileage: 52100,
+    mileage: 180000,
     lastUpdate: '3 min ago',
-    route: 'Cabuyao → LIMA (Via SLEX)'
+    route: 'Calamba → Tanauan (Via SLEX)'
   },
   {
     id: 'TRK-004',
@@ -81,7 +82,7 @@ const generateMockTrucks = () => [
     location: { lat: 14.1700, lng: 121.2200, city: 'Los Baños Proper' },
     fuel: 68,
     speed: 40,
-    mileage: 41500,
+    mileage: 155000,
     lastUpdate: '3 min ago',
     route: 'Calamba → Los Baños (Local Delivery)'
   },
@@ -92,7 +93,7 @@ const generateMockTrucks = () => [
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory - Service Bay' },
     fuel: 30,
     speed: 0,
-    mileage: 67800,
+    mileage: 385000,
     lastUpdate: '2 hours ago',
     route: 'Under Maintenance'
   },
@@ -103,9 +104,108 @@ const generateMockTrucks = () => [
     location: { lat: 14.2250, lng: 121.0800, city: 'Silang Boundary' },
     fuel: 85,
     speed: 45,
-    mileage: 34200,
+    mileage: 280000,
     lastUpdate: '4 min ago',
     route: 'Calamba → Silang, Cavite'
+  },
+  {
+    id: 'TRK-007',
+    driver: 'Carlos Ramos',
+    status: 'idle',
+    location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+    fuel: 90,
+    speed: 0,
+    mileage: 160000,
+    lastUpdate: '1 hour ago',
+    route: 'Idle - Awaiting Dispatch'
+  },
+  {
+    id: 'TRK-008',
+    driver: 'Elena Flores',
+    status: 'active',
+    location: { lat: 14.0750, lng: 121.0900, city: 'Tanauan City' },
+    fuel: 62,
+    speed: 75,
+    mileage: 140000,
+    lastUpdate: '2 min ago',
+    route: 'Calamba → Lipa City (Batangas Delivery)'
+  },
+  {
+    id: 'TRK-009',
+    driver: 'Miguel Torres',
+    status: 'active',
+    location: { lat: 14.2725, lng: 121.1250, city: 'Cabuyao, Laguna' },
+    fuel: 80,
+    speed: 55,
+    mileage: 65000,
+    lastUpdate: '1 min ago',
+    route: 'Cabuyao → Biñan (Local Delivery)'
+  },
+  {
+    id: 'TRK-010',
+    driver: 'Sofia Aquino',
+    status: 'active',
+    location: { lat: 14.3500, lng: 121.0450, city: 'Biñan, Laguna' },
+    fuel: 55,
+    speed: 60,
+    mileage: 135000,
+    lastUpdate: '3 min ago',
+    route: 'Biñan → Santa Rosa (Laguna Loop)'
+  },
+  {
+    id: 'TRK-011',
+    driver: 'Roberto Cruz',
+    status: 'active',
+    location: { lat: 13.8800, lng: 121.0200, city: 'Lipa City, Batangas' },
+    fuel: 48,
+    speed: 80,
+    mileage: 95000,
+    lastUpdate: '2 min ago',
+    route: 'LIMA → Lipa → Batangas City'
+  },
+  {
+    id: 'TRK-012',
+    driver: 'Patricia Lim',
+    status: 'active',
+    location: { lat: 14.1100, lng: 121.1050, city: 'Sto. Tomas, Batangas' },
+    fuel: 70,
+    speed: 65,
+    mileage: 145000,
+    lastUpdate: '4 min ago',
+    route: 'Calamba → Sto. Tomas → Tanauan'
+  },
+  {
+    id: 'TRK-013',
+    driver: 'Dennis Reyes',
+    status: 'idle',
+    location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
+    fuel: 88,
+    speed: 0,
+    mileage: 35000,
+    lastUpdate: '45 min ago',
+    route: 'Idle - Awaiting Dispatch'
+  },
+  {
+    id: 'TRK-014',
+    driver: 'Grace Navarro',
+    status: 'active',
+    location: { lat: 14.3100, lng: 121.0550, city: 'Santa Rosa, Laguna' },
+    fuel: 92,
+    speed: 50,
+    mileage: 8000,
+    lastUpdate: '1 min ago',
+    route: 'Santa Rosa → Calamba (New Truck)'
+  },
+  {
+    id: 'TRK-015',
+    driver: 'Mark Villanueva',
+    status: 'active',
+    location: { lat: 14.0000, lng: 121.0550, city: 'Malvar, Batangas' },
+    fuel: 60,
+    speed: 70,
+    mileage: 55000,
+    lastUpdate: '2 min ago',
+    route: 'Calamba → Malvar → LIMA Technopark'
   }
 ];
 
@@ -113,30 +213,37 @@ const generateMockAlerts = () => [
   {
     id: 1,
     type: 'critical',
-    title: 'Low Fuel Alert - TRK-005',
-    description: 'Fuel level at 30%. Recommend refueling soon.',
+    title: 'Low Fuel Alert - TRK-005 (ZBJ-997)',
+    description: 'Fuel level at 30%. Isuzu NQR under maintenance at APMCI Factory.',
     time: '5 minutes ago'
   },
   {
     id: 2,
     type: 'warning',
-    title: 'Maintenance Due - TRK-003',
-    description: 'Scheduled maintenance in 200 km. Book service appointment.',
+    title: 'Maintenance Due - TRK-003 (NCF-2403)',
+    description: 'Hino WU730L scheduled maintenance in 200 km. Book service appointment.',
     time: '1 hour ago'
   },
   {
     id: 3,
     type: 'info',
-    title: 'Route Optimization',
-    description: 'TRK-001 can save 45 min by taking Hwy 5.',
+    title: 'Route Optimization - TRK-011 (NGX 3840)',
+    description: 'Isuzu GIGA can save 45 min via STAR Tollway to Batangas City.',
     time: '2 hours ago'
   },
   {
     id: 4,
     type: 'warning',
-    title: 'Speed Alert - TRK-004',
-    description: 'Vehicle exceeded speed limit on Hwy 2.',
+    title: 'Speed Alert - TRK-008 (NDN 3363)',
+    description: 'Hino Profia exceeded speed limit on SLEX Southbound.',
     time: '3 hours ago'
+  },
+  {
+    id: 5,
+    type: 'info',
+    title: 'New Truck Online - TRK-014 (CCE 5647)',
+    description: 'Isuzu Forward 2025 now active on Santa Rosa-Calamba route.',
+    time: '4 hours ago'
   }
 ];
 
@@ -492,7 +599,7 @@ function Dashboard() {
           <div className="stat-icon red">🔋</div>
           <div className="stat-value">{stats.avgFuel}%</div>
           <div className="stat-label">Fleet Avg Fuel</div>
-          <div className="stat-change negative">↓ Monitor TRK-005</div>
+          <div className="stat-change negative">↓ Monitor ZBJ-997</div>
         </div>
       </div>
 
@@ -591,6 +698,8 @@ function Dashboard() {
         return <MaintenancePage />;
       case 'devices':
         return <DevicesPage />;
+      case 'candata':
+        return <CanDataPage />;
       default:
         return renderDashboard();
     }
@@ -673,6 +782,13 @@ function Dashboard() {
           <span>📡</span>
           <span>GPS Devices</span>
         </div>
+        <div
+          className={`nav-item ${activeView === 'candata' ? 'active' : ''}`}
+          onClick={() => handleNavClick('candata')}
+        >
+          <span>🔌</span>
+          <span>CAN Bus Data</span>
+        </div>
         <div className="nav-item disabled">
           <span>📈</span>
           <span>Reports</span>
@@ -697,7 +813,7 @@ function Dashboard() {
       </div>
 
       <div className="main-content">
-        {activeView !== 'drivers' && activeView !== 'maintenance' && activeView !== 'devices' && (
+        {activeView !== 'drivers' && activeView !== 'maintenance' && activeView !== 'devices' && activeView !== 'candata' && (
           <div className="header">
             <h1>{getPageTitle().title}</h1>
             <p>{getPageTitle().subtitle}</p>

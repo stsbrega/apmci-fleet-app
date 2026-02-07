@@ -193,6 +193,23 @@ export const alertsAPI = {
   getStats: (days = 7) => apiCall(`/alerts/stats/summary?days=${days}`),
 };
 
+// CAN Bus Data API (Teltonika FMC150)
+export const canAPI = {
+  getLatest: (truckId) => apiCall(`/can/${truckId}/latest`),
+
+  getHistory: (truckId, params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiCall(`/can/${truckId}/history${query ? `?${query}` : ''}`);
+  },
+
+  getStats: (truckId, params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return apiCall(`/can/${truckId}/stats${query ? `?${query}` : ''}`);
+  },
+
+  getFleetSummary: () => apiCall('/can/fleet/summary'),
+};
+
 const api = {
   auth: authAPI,
   trucks: trucksAPI,
@@ -201,6 +218,7 @@ const api = {
   fuel: fuelAPI,
   maintenance: maintenanceAPI,
   alerts: alertsAPI,
+  can: canAPI,
 };
 
 export default api;

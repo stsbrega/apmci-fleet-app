@@ -90,6 +90,16 @@ const emitDriverAssignment = (driverId, truckId, action) => {
 };
 
 /**
+ * Emit CAN bus data update for a specific truck
+ */
+const emitCanDataUpdate = (truckId, canData) => {
+  if (io) {
+    io.to(`truck:${truckId}`).emit('can:update', { truckId, ...canData });
+    io.to('fleet').emit('truck:can', { truckId, ...canData });
+  }
+};
+
+/**
  * Broadcast message to all connected clients
  */
 const broadcast = (event, data) => {
@@ -105,5 +115,6 @@ module.exports = {
   emitAlert,
   emitTruckStatusChange,
   emitDriverAssignment,
+  emitCanDataUpdate,
   broadcast
 };

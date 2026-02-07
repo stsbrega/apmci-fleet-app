@@ -148,25 +148,39 @@ function DevicesPage() {
         </div>
       </div>
 
-      {/* FMC250 Configuration Guide */}
+      {/* FMC150 Configuration Guide */}
       <div className="api-info-card">
-        <h3>📡 Teltonika FMC250 Setup Guide</h3>
-        <p className="device-model">Recommended Device: <strong>FMC250</strong> (4G LTE Cat 1, IP67 Waterproof)</p>
+        <h3>📡 Teltonika FMC150 Setup Guide</h3>
+        <p className="device-model">Device: <strong>FMC150</strong> (4G LTE Cat 1, GNSS, CAN Bus, IP67 Waterproof)</p>
 
         <div className="config-section">
-          <h4>1. Server Configuration</h4>
+          <h4>1. TCP Server Configuration (Recommended - Native Protocol)</h4>
           <div className="endpoint-box">
-            <code>POST http://YOUR_SERVER_IP:5000/api/gps/device/<span className="highlight">IMEI</span></code>
+            <code>TCP <span className="highlight">YOUR_SERVER_IP</span>:5027 (Codec 8 Extended)</code>
           </div>
-          <p className="config-note">Replace YOUR_SERVER_IP with your server's public IP address. Use the device's IMEI as the Device ID.</p>
+          <p className="config-note">
+            The FMC150 communicates natively via TCP using Teltonika Codec 8E binary protocol.
+            Configure the device IMEI as the Device ID in the Teltonika Configurator.
+          </p>
         </div>
 
         <div className="config-section">
-          <h4>2. Teltonika Configurator Settings</h4>
+          <h4>2. HTTP Fallback (Alternative)</h4>
+          <div className="endpoint-box">
+            <code>POST http://<span className="highlight">YOUR_SERVER_IP</span>:5000/api/gps/device/<span className="highlight">IMEI</span></code>
+          </div>
+        </div>
+
+        <div className="config-section">
+          <h4>3. Teltonika Configurator Settings</h4>
           <div className="config-grid">
             <div className="config-item">
               <span className="config-label">Protocol:</span>
-              <span className="config-value">HTTP</span>
+              <span className="config-value">TCP</span>
+            </div>
+            <div className="config-item">
+              <span className="config-label">Codec:</span>
+              <span className="config-value">Codec 8 Extended</span>
             </div>
             <div className="config-item">
               <span className="config-label">Domain:</span>
@@ -174,7 +188,7 @@ function DevicesPage() {
             </div>
             <div className="config-item">
               <span className="config-label">Port:</span>
-              <span className="config-value">5000</span>
+              <span className="config-value">5027</span>
             </div>
             <div className="config-item">
               <span className="config-label">APN (Globe):</span>
@@ -188,26 +202,36 @@ function DevicesPage() {
         </div>
 
         <div className="config-section">
-          <h4>3. Data Format</h4>
+          <h4>4. CAN Bus Configuration</h4>
           <div className="format-info">
-            <strong>Supported formats:</strong>
+            <strong>Enable these I/O parameters in Teltonika Configurator:</strong>
             <ul>
-              <li><code>{'{ "lat": 14.21, "lng": 121.16, "speed": 45, "fuel": 75 }'}</code></li>
-              <li><code>{'{ "latitude": 14.21, "longitude": 121.16, "speed": 45 }'}</code></li>
+              <li><code>Engine RPM (AVL ID: 24)</code> - Engine speed</li>
+              <li><code>Fuel Level (AVL ID: 51)</code> - CAN fuel percentage</li>
+              <li><code>Coolant Temperature (AVL ID: 72)</code> - Engine temperature</li>
+              <li><code>Vehicle Speed (AVL ID: 191)</code> - CAN bus speed</li>
+              <li><code>Total Odometer (AVL ID: 16)</code> - Distance traveled</li>
+              <li><code>Battery Voltage (AVL ID: 66)</code> - Vehicle battery</li>
             </ul>
           </div>
         </div>
 
         <div className="config-section features">
-          <h4>4. FMC250 Key Features</h4>
+          <h4>5. FMC150 Key Features</h4>
           <div className="feature-tags">
             <span className="feature-tag">4G LTE Cat 1</span>
+            <span className="feature-tag">GNSS (GPS/GLONASS)</span>
+            <span className="feature-tag">CAN Bus Reader</span>
             <span className="feature-tag">IP67 Waterproof</span>
-            <span className="feature-tag">CAN Bus</span>
-            <span className="feature-tag">Fuel Monitoring</span>
+            <span className="feature-tag">OBD-II Interface</span>
+            <span className="feature-tag">Codec 8E TCP</span>
+            <span className="feature-tag">DTC Reading</span>
             <span className="feature-tag">3G/2G Fallback</span>
           </div>
-          <p className="config-note">Ideal for Manila-Laguna-Batangas routes with harsh weather conditions.</p>
+          <p className="config-note">
+            15 units on order from Teltonika. Ideal for APMCI's Laguna-Batangas delivery routes
+            with CAN bus diagnostics for engine health monitoring.
+          </p>
         </div>
       </div>
 
