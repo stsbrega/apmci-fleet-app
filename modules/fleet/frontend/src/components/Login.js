@@ -92,12 +92,6 @@ const Login = () => {
             </button>
           </p>
         </div>
-
-        <div className="demo-credentials">
-          <p><strong>Demo Credentials:</strong></p>
-          <p>Email: admin@fleettrack.com</p>
-          <p>Password: admin123</p>
-        </div>
       </div>
     </div>
   );
