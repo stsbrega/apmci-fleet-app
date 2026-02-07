@@ -41,107 +41,123 @@ function AppContent() {
 }
 
 // Mock data generators - APMCI Laguna-Batangas delivery routes (15-truck fleet)
+// Data from LTO registration records
 const generateMockTrucks = () => [
   {
-    id: 'TRK-001', plate_number: 'NCG 4723', make: 'Hino', model: 'WU342L-M', year: 2018, vin: 'MJECH40HXG5142022',
+    id: 'TRK-001', plate_number: 'NCG 4723', make: 'Hino', model: 'WU342L-M', year: 2018,
+    vin: 'MJECH40HXG5142022', body_type: 'Aluminum Van', gross_weight: 4500, net_capacity: 2250,
     driver: 'Juan Dela Cruz', status: 'active',
     location: { lat: 14.1450, lng: 121.1200, city: 'SLEX - Southbound' },
-    fuel: 78, speed: 85, mileage: 112000, lastUpdate: '2 min ago',
+    fuel: 78, speed: 65, mileage: 112000, lastUpdate: '2 min ago',
     route: 'Calamba → LIMA Technopark (Yamaha Delivery)'
   },
   {
-    id: 'TRK-002', plate_number: 'NDF 7968', make: 'Hino', model: 'WU342L-M', year: 2016, vin: 'MJECH40H1G5142023',
+    id: 'TRK-002', plate_number: 'NDF 7968', make: 'Hino', model: 'WU342L-M', year: 2016,
+    vin: 'MJECH40H1G5142023', body_type: 'Aluminum Van', gross_weight: 4500, net_capacity: 2250,
     driver: 'Maria Santos', status: 'active',
     location: { lat: 14.0400, lng: 121.0700, city: 'STAR Tollway' },
     fuel: 65, speed: 70, mileage: 148000, lastUpdate: '1 min ago',
     route: 'LIMA Technopark → Calamba (Return Trip)'
   },
   {
-    id: 'TRK-003', plate_number: 'NCF-2403', make: 'Hino', model: 'WU730L', year: 2016, vin: 'JHHZJL0H102000313',
+    id: 'TRK-003', plate_number: 'NCF-2403', make: 'Hino', model: 'WU730L', year: 2016,
+    vin: 'JHHZJL0H102000313', body_type: 'Aluminum Van', gross_weight: 8300, net_capacity: 4150,
     driver: 'Pedro Reyes', status: 'active',
     location: { lat: 14.0858, lng: 121.1528, city: 'Tanauan, Batangas' },
     fuel: 55, speed: 55, mileage: 156000, lastUpdate: '3 min ago',
     route: 'Calamba → Tanauan (Via SLEX)'
   },
   {
-    id: 'TRK-004', plate_number: 'NAL 2498', make: 'Hino', model: 'FG8J', year: 2017, vin: 'FG8J17888',
+    id: 'TRK-004', plate_number: 'NAL 2498', make: 'Hino', model: 'FG8J', year: 2017,
+    vin: 'FG8J17888', body_type: 'Aluminum Van', gross_weight: 15100, net_capacity: 7550,
     driver: 'Ana Garcia', status: 'active',
     location: { lat: 13.7565, lng: 121.0584, city: 'Batangas Port' },
     fuel: 72, speed: 45, mileage: 125000, lastUpdate: '3 min ago',
     route: 'Calamba → Batangas Port'
   },
   {
-    id: 'TRK-005', plate_number: 'ZBJ-997', make: 'Isuzu', model: 'NQR', year: 2005, vin: 'PABN1R71RL5200178',
+    id: 'TRK-005', plate_number: 'ZBJ-997', make: 'Isuzu', model: 'NQR', year: 2005,
+    vin: 'PABN1R71RL5200178', body_type: 'Aluminum Van', gross_weight: 8000, net_capacity: 4000,
     driver: 'Jose Mendoza', status: 'maintenance',
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory - Service Bay' },
     fuel: 30, speed: 0, mileage: 312000, lastUpdate: '2 hours ago',
     route: 'Under Maintenance'
   },
   {
-    id: 'TRK-006', plate_number: 'NQO-721', make: 'Isuzu', model: 'ELF', year: 2009, vin: 'ENKR-20080481-C',
+    id: 'TRK-006', plate_number: 'NQO-721', make: 'Isuzu', model: 'ELF (Rebuilt)', year: 2009,
+    vin: 'ENKR-20080481-C', body_type: 'Aluminum Van', gross_weight: 4200, net_capacity: 2100,
     driver: 'Rosa Villanueva', status: 'active',
     location: { lat: 14.1700, lng: 121.2200, city: 'Los Baños, Laguna' },
     fuel: 82, speed: 40, mileage: 245000, lastUpdate: '4 min ago',
     route: 'Calamba → Los Baños'
   },
   {
-    id: 'TRK-007', plate_number: 'NAZ 4573', make: 'Isuzu', model: 'FRR', year: 2016, vin: 'FRR35T4-7000044',
+    id: 'TRK-007', plate_number: 'NAZ 4573', make: 'Isuzu', model: 'FRR', year: 2016,
+    vin: 'FRR35T4-7000044', body_type: 'Aluminum Van', gross_weight: 8500, net_capacity: 4250,
     driver: 'Ricardo Bautista', status: 'idle',
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
     fuel: 45, speed: 0, mileage: 142000, lastUpdate: '1 hour ago',
     route: 'Idle - Awaiting Dispatch'
   },
   {
-    id: 'TRK-008', plate_number: 'NDN 3363', make: 'Hino', model: 'Profia', year: 2018, vin: 'PN2PWJ-11674',
+    id: 'TRK-008', plate_number: 'NDN 3363', make: 'Hino', model: 'Profia', year: 2018,
+    vin: 'PN2PWJ-11674', body_type: 'Canvass Wing Van', gross_weight: 24000, net_capacity: 12000,
     driver: 'Eduardo Ramos', status: 'active',
     location: { lat: 13.9700, lng: 121.0450, city: 'LIMA Technopark' },
     fuel: 68, speed: 25, mileage: 98000, lastUpdate: '2 min ago',
     route: 'Calamba → LIMA (Yamaha Delivery)'
   },
   {
-    id: 'TRK-009', plate_number: 'CBR 1147', make: 'Isuzu', model: 'Forward', year: 2022, vin: 'FSD34T4-7000116',
+    id: 'TRK-009', plate_number: 'CBR 1147', make: 'Isuzu', model: 'Forward (Rebuilt)', year: 2022,
+    vin: 'FSD34T4-7000116', body_type: 'Close Van', gross_weight: 8500, net_capacity: 4250,
     driver: 'Fernando Torres', status: 'active',
     location: { lat: 14.3134, lng: 121.1110, city: 'Santa Rosa, Laguna' },
     fuel: 88, speed: 50, mileage: 38000, lastUpdate: '1 min ago',
     route: 'Santa Rosa → Calamba'
   },
   {
-    id: 'TRK-010', plate_number: 'NGF 9660', make: 'Hino', model: 'Profia', year: 2018, vin: 'FN2PWJ-12186',
+    id: 'TRK-010', plate_number: 'NGF 9660', make: 'Hino', model: 'Profia', year: 2018,
+    vin: 'FN2PWJ-12186', body_type: 'Aluminum Wing Van', gross_weight: 24000, net_capacity: 12000,
     driver: 'Miguel Aquino', status: 'active',
     location: { lat: 13.8472, lng: 121.2087, city: 'Rosario, Batangas' },
     fuel: 52, speed: 60, mileage: 105000, lastUpdate: '3 min ago',
     route: 'Rosario → Calamba (Return)'
   },
   {
-    id: 'TRK-011', plate_number: 'NGX 3840', make: 'Isuzu', model: 'GIGA', year: 2020, vin: 'CXG77X8-7000117',
+    id: 'TRK-011', plate_number: 'NGX 3840', make: 'Isuzu', model: 'GIGA', year: 2020,
+    vin: 'CXG77X8-7000117', body_type: 'Aluminum Closed Van', gross_weight: 24000, net_capacity: 12000,
     driver: 'Roberto Cruz', status: 'active',
     location: { lat: 14.3342, lng: 121.0832, city: 'Biñan, Laguna' },
     fuel: 61, speed: 55, mileage: 78000, lastUpdate: '2 min ago',
     route: 'Biñan → Calamba'
   },
   {
-    id: 'TRK-012', plate_number: 'NFY 8062', make: 'Isuzu', model: 'GIGA', year: 2018, vin: 'CYG51Y5Z-7000020',
+    id: 'TRK-012', plate_number: 'NFY 8062', make: 'Isuzu', model: 'GIGA', year: 2018,
+    vin: 'CYG51Y5Z-7000020', body_type: 'Aluminum Van', gross_weight: 24000, net_capacity: 12000,
     driver: 'Carlos Navarro', status: 'active',
     location: { lat: 13.9414, lng: 121.1622, city: 'Lipa, Batangas' },
     fuel: 74, speed: 48, mileage: 115000, lastUpdate: '4 min ago',
     route: 'Calamba → Lipa'
   },
   {
-    id: 'TRK-013', plate_number: 'CBF 2015', make: 'Isuzu', model: 'FTR', year: 2023, vin: 'FTR34-7001940',
+    id: 'TRK-013', plate_number: 'CBF 2015', make: 'Isuzu', model: 'FTR (Rebuilt)', year: 2023,
+    vin: 'FTR34-7001940', body_type: 'Closed Van', gross_weight: 8500, net_capacity: 4250,
     driver: 'Danilo Pascual', status: 'idle',
     location: { lat: 14.2114, lng: 121.1653, city: 'APMCI Factory, Calamba' },
     fuel: 90, speed: 0, mileage: 22000, lastUpdate: '45 min ago',
     route: 'Idle - Awaiting Dispatch'
   },
   {
-    id: 'TRK-014', plate_number: 'CCE 5647', make: 'Isuzu', model: 'Forward', year: 2025, vin: 'FRDS4V4-7000070',
+    id: 'TRK-014', plate_number: 'CCE 5647', make: 'Isuzu', model: 'Forward', year: 2025,
+    vin: 'FRDS4V4-7000070', body_type: 'Aluminum Van', gross_weight: 8500, net_capacity: 4250,
     driver: 'Ernesto Lim', status: 'active',
     location: { lat: 14.0683, lng: 121.3233, city: 'San Pablo, Laguna' },
     fuel: 95, speed: 42, mileage: 5200, lastUpdate: '1 min ago',
     route: 'Calamba → San Pablo'
   },
   {
-    id: 'TRK-015', plate_number: 'CCE 5649', make: 'Isuzu', model: 'Forward', year: 2023, vin: 'FRD34T4-7000228',
+    id: 'TRK-015', plate_number: 'CCE 5649', make: 'Isuzu', model: 'Forward', year: 2023,
+    vin: 'FRD34T4-7000228', body_type: 'Wing Van', gross_weight: 8500, net_capacity: 4250,
     driver: 'Gabriel Mercado', status: 'active',
     location: { lat: 14.2250, lng: 121.0800, city: 'Silang, Cavite' },
     fuel: 70, speed: 45, mileage: 32000, lastUpdate: '2 min ago',
@@ -310,6 +326,9 @@ function Dashboard() {
           model: truck.model || '',
           year: truck.year || '',
           vin: truck.vin || '',
+          body_type: truck.body_type || '',
+          gross_weight: truck.gross_weight || '',
+          net_capacity: truck.net_capacity || '',
           driver: truck.driver_name || 'Unassigned',
           status: truck.status,
           location: truck.location ? {
@@ -497,10 +516,12 @@ function Dashboard() {
               </div>
               <div className="vehicle-details">
                 <span>🚛 {truck.id} • {truck.driver}</span>
+                {truck.body_type && <span>📦 {truck.body_type}</span>}
                 <span>📍 {truck.location.city}</span>
                 <span>⛽ {truck.fuel.toFixed(1)}%</span>
                 <span>🚗 {truck.speed} km/h</span>
                 <span>📊 {truck.mileage.toLocaleString()} km</span>
+                {truck.gross_weight && <span>⚖️ {(truck.gross_weight / 1000).toFixed(1)}t GVW</span>}
               </div>
               <div className="progress-bar">
                 <div
@@ -579,6 +600,7 @@ function Dashboard() {
               <tr>
                 <th>Plate #</th>
                 <th>Vehicle</th>
+                <th>Body Type</th>
                 <th>Driver</th>
                 <th>Fuel Level</th>
                 <th>Distance (km)</th>
@@ -593,6 +615,7 @@ function Dashboard() {
                   <tr key={truck.id}>
                     <td className="font-semibold">{truck.plate_number || truck.id}</td>
                     <td>{truck.make} {truck.model} {truck.year ? `(${truck.year})` : ''}</td>
+                    <td>{truck.body_type || '-'}</td>
                     <td>{truck.driver}</td>
                     <td>
                       <div className="fuel-cell">

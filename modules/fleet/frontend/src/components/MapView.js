@@ -261,6 +261,7 @@ function MapView({ trucks, selectedTruck, onSelectTruck, useRealData }) {
                 <div className="truck-popup">
                   <h4>{truck.plate_number || truck.id}</h4>
                   <p><strong>Vehicle:</strong> {truck.make} {truck.model} {truck.year ? `(${truck.year})` : ''}</p>
+                  {truck.body_type && <p><strong>Body:</strong> {truck.body_type}{truck.gross_weight ? ` - ${(truck.gross_weight / 1000).toFixed(1)}t GVW` : ''}</p>}
                   <p><strong>ID:</strong> {truck.id}</p>
                   <p><strong>Driver:</strong> {truck.driver}</p>
                   <p><strong>Location:</strong> {truck.location?.city || 'Unknown'}</p>
